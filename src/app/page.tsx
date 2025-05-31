@@ -5,6 +5,7 @@ import { TestInterface } from './components/TestInterface';
 import { PipelineInterface } from './components/PipelineInterface';
 import { RoastInterface } from './components/RoastInterface';
 import { ResultsDisplay } from './components/ResultsDisplay';
+import { VideoTestInterface } from './components/VideoTestInterface';
 
 // Define the same types used in other components for consistency
 interface GeneratedContent {
@@ -50,7 +51,7 @@ interface SingleAPIResult {
 // Union type for all possible result types
 type ResultsData = PipelineResults | SingleAPIResult | null;
 
-type TabType = 'roast' | 'pipeline' | 'test' | 'results';
+type TabType = 'roast' | 'video' | 'pipeline' | 'test' | 'results';
 
 interface Tab {
   id: TabType;
@@ -64,6 +65,7 @@ export default function Home() {
 
   const tabs: Tab[] = [
     { id: 'roast' as TabType, label: 'Profile Roaster', icon: '🔥' },
+    { id: 'video' as TabType, label: 'Video Test', icon: '📹' },
     { id: 'pipeline' as TabType, label: 'Full Pipeline', icon: '🔄' },
     { id: 'test' as TabType, label: 'API Testing', icon: '🧪' },
     { id: 'results' as TabType, label: 'Results', icon: '📊' },
@@ -106,6 +108,9 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           {activeTab === 'roast' && (
             <RoastInterface onResults={setResults} />
+          )}
+          {activeTab === 'video' && (
+            <VideoTestInterface />
           )}
           {activeTab === 'pipeline' && (
             <PipelineInterface onResults={setResults} />
